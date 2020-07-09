@@ -2,33 +2,10 @@
 
 var p; // shortcut to reference prototypes
 var lib={};var ss={};var img={};
-lib.ssMetadata = [
-		{name:"flappy_atlas_", frames: [[0,394,481,339],[0,0,1239,392],[1241,0,304,866]]}
-];
+lib.ssMetadata = [];
 
 
 // symbols:
-
-
-
-(lib.bird = function() {
-	this.initialize(ss["flappy_atlas_"]);
-	this.gotoAndStop(0);
-}).prototype = p = new cjs.Sprite();
-
-
-
-(lib.ground = function() {
-	this.initialize(ss["flappy_atlas_"]);
-	this.gotoAndStop(1);
-}).prototype = p = new cjs.Sprite();
-
-
-
-(lib.pipe = function() {
-	this.initialize(ss["flappy_atlas_"]);
-	this.gotoAndStop(2);
-}).prototype = p = new cjs.Sprite();
 // helper functions:
 
 function mc_symbol_clone() {
@@ -179,14 +156,7 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_8},{t:this.shape_7}]}).wait(1));
 
-	// Reference
-	this.instance = new lib.pipe();
-	this.instance.parent = this;
-	this.instance.setTransform(-9,-8,0.2541,0.254);
-
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
-
-}).prototype = getMCSymbolPrototype(lib.LowerPipe, new cjs.Rectangle(-9,-8,77.3,220), null);
+}).prototype = getMCSymbolPrototype(lib.LowerPipe, new cjs.Rectangle(-1,-1,62,205), null);
 
 
 (lib.GroundSlice = function(mode,startPosition,loop) {
@@ -251,14 +221,7 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 
 	this.timeline.addTween(cjs.Tween.get(this.shape_10).wait(1));
 
-	// Reference
-	this.instance = new lib.ground();
-	this.instance.parent = this;
-	this.instance.setTransform(-8,-8,0.1679,0.1679);
-
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
-
-}).prototype = getMCSymbolPrototype(lib.GroundSlice, new cjs.Rectangle(-8,-8,208,65.8), null);
+}).prototype = getMCSymbolPrototype(lib.GroundSlice, new cjs.Rectangle(-1,-1,195,51), null);
 
 
 (lib.CollisionPoint = function(mode,startPosition,loop) {
@@ -328,7 +291,7 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 	this.instance = new lib.LowerPipe();
 	this.instance.parent = this;
 	this.instance.setTransform(26.7,-150.8,1,1,0,180,0,29.7,101.8);
-	this.instance.cache(-11,-10,81,224);
+	this.instance.cache(-3,-3,66,209);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
 
@@ -336,15 +299,15 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 	this.instance_1 = new lib.LowerPipe();
 	this.instance_1.parent = this;
 	this.instance_1.setTransform(26.7,150.8,1,1,0,0,0,29.7,101.8);
-	this.instance_1.cache(-11,-10,81,224);
+	this.instance_1.cache(-3,-3,66,209);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_1).wait(1));
 
-}).prototype = getMCSymbolPrototype(lib.Pipe, new cjs.Rectangle(-12,-261,77.3,522), null);
+}).prototype = getMCSymbolPrototype(lib.Pipe, new cjs.Rectangle(-3,-252,60.1,504.1), null);
 
 
 (lib.Bird = function(mode,startPosition,loop) {
-if (loop == null) { loop = false; }	this.initialize(mode,startPosition,loop,{});
+	this.initialize(mode,startPosition,loop,{});
 
 	// Collision Points
 	this.hit8 = new lib.CollisionPoint();
@@ -432,7 +395,7 @@ if (loop == null) { loop = false; }	this.initialize(mode,startPosition,loop,{});
 	this.shape_8.setTransform(-15.625,10.1);
 
 	this.shape_9 = new cjs.Shape();
-	this.shape_9.graphics.f("#C90102").s().p("AgwCJQgIgGgCgFQgEgHAAgHIACgMIAKgkIAVg8IAag0IABgCIAAgBIAcguIABgCIACgCIAiguIgUBQIgFAeIAAACIAAABIgBADIgEBRIAEBEQAAAEgEAHIgLAKQgPAIgUAAQgVAAgOgKg");
+	this.shape_9.graphics.f("#C90102").s().p("AgwCJQgIgGgCgFQgEgHAAgHIACgMIAfhgIAag0IABgCIAAgBIAcguIABgCIACgCIAiguIgUBQIgFAeIAAACIAAABIgBADIgEBRIAEBEQAAAEgEAHIgLAKQgPAIgUAAQgVAAgOgKg");
 	this.shape_9.setTransform(-15.625,10.1);
 
 	this.shape_10 = new cjs.Shape();
@@ -519,15 +482,8 @@ if (loop == null) { loop = false; }	this.initialize(mode,startPosition,loop,{});
 
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_25},{t:this.shape_24}]}).wait(14));
 
-	// Reference
-	this.instance = new lib.bird();
-	this.instance.parent = this;
-	this.instance.setTransform(-50,-40,0.2212,0.2212);
-
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(14));
-
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-50,-40,106.4,77.8);
+p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 
 
 (lib.Background = function(mode,startPosition,loop) {
@@ -564,6 +520,51 @@ p.nominalBounds = new cjs.Rectangle(-50,-40,106.4,77.8);
 // stage content:
 (lib.flappy = function(mode,startPosition,loop) {
 	this.initialize(mode,startPosition,loop,{});
+
+	// timeline functions:
+	this.frame_0 = function() {
+		function Main(){
+			/*
+			exportRoot: represents the stage and all the content
+				within it
+			*/
+			exportRoot.screenFlash.visible = false; //hide screen flash
+			exportRoot.gameOverPrompt.visible = false; 
+			exportRoot.getReadyPrompt.visible = false;
+			exportRoot.startInstructions.visible = false;
+		
+			// Detect mouse and keyboard key press
+			canvas.onmousedown = this.userPressed.bind(this);
+			window.onkeydown = this.userPressed.bind(this);
+			
+			createjs.Ticker.addEventListener(
+				"tick", 
+				this.update.bind(this)
+			);				
+		}
+		
+		Main.prototype.update = function(e){
+			console.log("Main::update()");
+		}
+		
+		Main.prototype.userPressed = function(e){
+			console.log("Main::userPressed()");
+		}
+		
+		let main = new Main();
+	}
+
+	// actions tween:
+	this.timeline.addTween(cjs.Tween.get(this).call(this.frame_0).wait(1));
+
+	// Screen Flash
+	this.screenFlash = new lib.ScreenFlash();
+	this.screenFlash.name = "screenFlash";
+	this.screenFlash.parent = this;
+	this.screenFlash.setTransform(150,200);
+	this.screenFlash.cache(-154,-204,309,409);
+
+	this.timeline.addTween(cjs.Tween.get(this.screenFlash).wait(1));
 
 	// Score
 	this.score = new cjs.Text("0", "24px 'Arial'", "#FFFFFF");
@@ -615,19 +616,19 @@ p.nominalBounds = new cjs.Rectangle(-50,-40,106.4,77.8);
 	this.ground0.name = "ground0";
 	this.ground0.parent = this;
 	this.ground0.setTransform(96,375.9,1,1,0,0,0,96,24.9);
-	this.ground0.cache(-10,-10,212,70);
+	this.ground0.cache(-3,-3,199,55);
 
 	this.ground2 = new lib.GroundSlice();
 	this.ground2.name = "ground2";
 	this.ground2.parent = this;
 	this.ground2.setTransform(470,375.9,1,1,0,0,0,96,24.9);
-	this.ground2.cache(-10,-10,212,70);
+	this.ground2.cache(-3,-3,199,55);
 
 	this.ground1 = new lib.GroundSlice();
 	this.ground1.name = "ground1";
 	this.ground1.parent = this;
 	this.ground1.setTransform(283,375.9,1,1,0,0,0,96,24.9);
-	this.ground1.cache(-10,-10,212,70);
+	this.ground1.cache(-3,-3,199,55);
 
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.ground1},{t:this.ground2},{t:this.ground0}]}).wait(1));
 
@@ -657,17 +658,8 @@ p.nominalBounds = new cjs.Rectangle(-50,-40,106.4,77.8);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_1).wait(1));
 
-	// Screen Flash
-	this.screenFlash = new lib.ScreenFlash();
-	this.screenFlash.name = "screenFlash";
-	this.screenFlash.parent = this;
-	this.screenFlash.setTransform(150,200);
-	this.screenFlash.cache(-154,-204,309,409);
-
-	this.timeline.addTween(cjs.Tween.get(this.screenFlash).wait(1));
-
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(81,39,493,472);
+p.nominalBounds = new cjs.Rectangle(90,47.9,477.5,454.20000000000005);
 // library properties:
 lib.properties = {
 	id: 'B62E11E6CB1BE24C8F2EB7FCB785FEF3',
@@ -676,9 +668,7 @@ lib.properties = {
 	fps: 60,
 	color: "#CCCCCC",
 	opacity: 1.00,
-	manifest: [
-		{src:"images/flappy_atlas_.png?1594311674695", id:"flappy_atlas_"}
-	],
+	manifest: [],
 	preloads: []
 };
 
