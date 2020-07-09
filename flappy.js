@@ -536,6 +536,55 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 
 	// timeline functions:
 	this.frame_0 = function() {
+		function UI(){
+			/*
+			exportRoot: represents the stage and all the content
+				within it
+			*/
+			this.scoreLabel = exportRoot.score;
+			this.gameOverPrompt = exportRoot.gameOverPrompt;
+			this.getReadyPrompt = exportRoot.getReadyPrompt;
+			this.startInstructions = exportRoot.startInstructions;
+			this.screenFlash = exportRoot.screenFlash;
+			
+			this.getReady();
+		}
+		
+		UI.prototype.updateScore = function(score){
+			this.scoreLabel.text = score;
+		}
+		
+		UI.prototype.gameStart = function(){
+			this.gameOverPrompt.visible = false;
+			this.getReadyPrompt.visible = false;
+			this.startInstructions.visible = false;
+			this.screenFlash.visible = false;
+			this.updateScore(0);
+		}
+		
+		UI.prototype.getReady = function(){
+			this.gameOverPrompt.visible = false;
+			this.getReadyPrompt.visible = true;
+			this.startInstructions.visible = true;
+			this.screenFlash.visible = false;
+		}
+		
+		UI.prototype.gameOver = function(){
+			this.gameOverPrompt.visible = true;
+			this.getReadyPrompt.visible = false;
+			this.startInstructions.visible = false;
+			this.screenFlash.visible = false;
+		}
+		
+		UI.prototype.triggerScreenFlash = function(){
+			this.screenFlash.visible = true;
+			this.screenFlash.alpha = 1;
+			createjs.Tween.get(this.screenFlash).to({alpha:0}, 100);
+			/*
+			Tween: change the value of properties over a period of time
+			Changing screen flash alpha from 1 to 0 in 100ms
+			*/
+		}
 		function Bird(){
 			this.mc = exportRoot.bird;
 			this.initY = this.mc.y;
@@ -575,6 +624,10 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 		
 		Bird.prototype.isDead = function(){
 			return this.state === Bird.DEAD;
+		}
+		
+		Bird.prototype.isDying = function(){
+			return this.state === Bird.DYING;
 		}
 		
 		Bird.prototype.startFlying = function(){
@@ -798,17 +851,9 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 			this.ground = new Ground();
 			this.pipes = new Pipes();
 			this.bird = new Bird();
+			this.ui = new UI();
 			
 			this.score = 0;
-			
-			/*
-			exportRoot: represents the stage and all the content
-				within it
-			*/
-			exportRoot.screenFlash.visible = false; //hide screen flash
-			exportRoot.gameOverPrompt.visible = false; 
-			exportRoot.getReadyPrompt.visible = false;
-			exportRoot.startInstructions.visible = false;
 		
 			// Detect mouse and keyboard key press
 			canvas.onmousedown = this.userPressed.bind(this);
@@ -848,6 +893,7 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 			this.ground.startScrolling();
 			this.pipes.startScrolling();
 			this.bird.startFlying();
+			this.ui.gameStart();
 		}
 		
 		Main.prototype.checkForBirdCollidingWithGround = function(){
@@ -859,7 +905,7 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 		}
 		
 		Main.prototype.checkForBirdCollidingWithPipes = function(){
-			if(!this.bird.isDead()){
+			if(!this.bird.isDead() && !this.bird.isDying()){
 				if(this.pipes.isBirdTouchingAPipe(this.bird)){
 					this.birdHitPipe();
 				}
@@ -870,12 +916,14 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 			this.bird.hitGround();
 			this.ground.stopScrolling();
 			this.pipes.stopScrolling();
+			this.ui.gameOver();
 		}
 		
 		Main.prototype.birdHitPipe = function(){
 			this.bird.fallFromSky();
 			this.ground.stopScrolling();
 			this.pipes.stopScrolling();
+			this.ui.triggerScreenFlash();
 		}
 		
 		Main.prototype.checkForBirdPassingPipe = function(){
@@ -889,7 +937,7 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 		
 		Main.prototype.scoredPoint = function(){
 			this.score++;
-			exportRoot.score.text = this.score;
+			this.ui.updateScore(this.score);
 		}
 		
 		let main = new Main();
