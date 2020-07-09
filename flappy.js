@@ -551,7 +551,7 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 		}
 		
 		UI.prototype.updateScore = function(score){
-			this.scoreLabel.text = score;
+			this.scoreLabel.text = "Score: " + score;
 		}
 		
 		UI.prototype.gameStart = function(){
@@ -559,6 +559,7 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 			this.getReadyPrompt.visible = false;
 			this.startInstructions.visible = false;
 			this.screenFlash.visible = false;
+			this.scoreLabel.visible = true;
 			this.updateScore(0);
 		}
 		
@@ -567,13 +568,15 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 			this.getReadyPrompt.visible = true;
 			this.startInstructions.visible = true;
 			this.screenFlash.visible = false;
+			this.scoreLabel.visible = false;
 		}
 		
 		UI.prototype.gameOver = function(){
 			this.gameOverPrompt.visible = true;
 			this.getReadyPrompt.visible = false;
-			this.startInstructions.visible = false;
+			this.startInstructions.visible = true;
 			this.screenFlash.visible = false;
+			this.scoreLabel.visible = true;
 		}
 		
 		UI.prototype.triggerScreenFlash = function(){
@@ -641,6 +644,7 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 		Bird.prototype.flap = function(){
 			if(this.state === Bird.ALIVE && this.mc.y > 0){
 				this.velocity = Main.FLAP_IMPULSE;
+				createjs.Sound.play("flap");
 			}
 		}
 		
@@ -675,6 +679,10 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 		}
 		
 		Bird.prototype.hitGround = function(){
+			if(this.state === Bird.ALIVE){
+				createjs.Sound.play("hit");
+			}
+			
 			this.state = Bird.DEAD;
 			this.mc.stop();
 		}
@@ -683,6 +691,7 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 			if(this.state === Bird.ALIVE){
 				this.state = Bird.DYING;
 				this.velocity = 0;
+				createjs.Sound.play("hit");
 			}
 		}
 		
@@ -854,6 +863,8 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 			this.ui = new UI();
 			
 			this.score = 0;
+			
+			this.registerSound();
 		
 			// Detect mouse and keyboard key press
 			canvas.onmousedown = this.userPressed.bind(this);
@@ -938,6 +949,13 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 		Main.prototype.scoredPoint = function(){
 			this.score++;
 			this.ui.updateScore(this.score);
+			createjs.Sound.play("point");
+		}
+		
+		Main.prototype.registerSound = function(){
+			createjs.Sound.registerSound("sound/point.wav", "point");
+			createjs.Sound.registerSound("sound/flap.wav", "flap");
+			createjs.Sound.registerSound("sound/hit.wav", "hit");
 		}
 		
 		let main = new Main();
