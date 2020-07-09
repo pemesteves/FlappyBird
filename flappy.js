@@ -309,6 +309,19 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 (lib.Bird = function(mode,startPosition,loop) {
 	this.initialize(mode,startPosition,loop,{});
 
+	// timeline functions:
+	this.frame_14 = function() {
+		this.gotoAndPlay(0);
+		/*
+		When the animation reaches the end of the timeline it will be sent
+			back to the first frame (0) of the timeline and continue to 
+			play. It creates a endless animation.
+		*/
+	}
+
+	// actions tween:
+	this.timeline.addTween(cjs.Tween.get(this).wait(14).call(this.frame_14).wait(1));
+
 	// Collision Points
 	this.hit8 = new lib.CollisionPoint();
 	this.hit8.name = "hit8";
@@ -355,7 +368,7 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 	this.hit0.parent = this;
 	this.hit0.setTransform(6.8,-27.55,1,1,0,0,0,3.4,3.4);
 
-	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.hit0},{t:this.hit1},{t:this.hit2},{t:this.hit3},{t:this.hit4},{t:this.hit5},{t:this.hit6},{t:this.hit7},{t:this.hit8}]}).wait(14));
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.hit0},{t:this.hit1},{t:this.hit2},{t:this.hit3},{t:this.hit4},{t:this.hit5},{t:this.hit6},{t:this.hit7},{t:this.hit8}]}).to({state:[]},14).wait(1));
 
 	// Wing
 	this.shape = new cjs.Shape();
@@ -402,7 +415,7 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 	this.shape_10.graphics.f("#C90102").s().p("AAaBjIgcgvIAAgBIgBgCIgag1IgVg6IgMgxQAAgIAEgGQACgFAIgFQAOgKAVgBQAUgBAPAJIALAKQAEAHAAAFIgDAqIADBqIABADIAAABIAAACIASBXIAHAWg");
 	this.shape_10.setTransform(-15.625,-19.4);
 
-	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_2},{t:this.shape_1},{t:this.shape}]}).to({state:[{t:this.shape_4},{t:this.shape_3}]},1).to({state:[{t:this.shape_3}]},1).to({state:[{t:this.shape_5}]},1).to({state:[{t:this.shape_6}]},1).to({state:[{t:this.shape_6},{t:this.shape_7}]},1).to({state:[{t:this.shape_6},{t:this.shape_7},{t:this.shape_8}]},1).to({state:[{t:this.shape_6},{t:this.shape_7},{t:this.shape_9}]},1).to({state:[{t:this.shape_6},{t:this.shape_7}]},1).to({state:[{t:this.shape_6}]},1).to({state:[{t:this.shape_5}]},1).to({state:[{t:this.shape_3}]},1).to({state:[{t:this.shape_4},{t:this.shape_3}]},1).to({state:[{t:this.shape_10},{t:this.shape_4},{t:this.shape_3}]},1).wait(1));
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_2},{t:this.shape_1},{t:this.shape}]}).to({state:[{t:this.shape_4},{t:this.shape_3}]},1).to({state:[{t:this.shape_3}]},1).to({state:[{t:this.shape_5}]},1).to({state:[{t:this.shape_6}]},1).to({state:[{t:this.shape_6},{t:this.shape_7}]},1).to({state:[{t:this.shape_6},{t:this.shape_7},{t:this.shape_8}]},1).to({state:[{t:this.shape_6},{t:this.shape_7},{t:this.shape_9}]},1).to({state:[{t:this.shape_6},{t:this.shape_7}]},1).to({state:[{t:this.shape_6}]},1).to({state:[{t:this.shape_5}]},1).to({state:[{t:this.shape_3}]},1).to({state:[{t:this.shape_4},{t:this.shape_3}]},1).to({state:[{t:this.shape_10},{t:this.shape_4},{t:this.shape_3}]},1).to({state:[]},1).wait(1));
 
 	// Eye
 	this.shape_11 = new cjs.Shape();
@@ -425,7 +438,7 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 	this.shape_15.graphics.f("#410000").s().p("AgDBnQgkgCgPgjQgRgkgMgyIgBgIQBZAnBIhyQAIAdABAjQAAA7gbArQgaApghAAIgDgBg");
 	this.shape_15.setTransform(14.9,0.1304);
 
-	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_15},{t:this.shape_14},{t:this.shape_13},{t:this.shape_12},{t:this.shape_11}]}).wait(14));
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_15},{t:this.shape_14},{t:this.shape_13},{t:this.shape_12},{t:this.shape_11}]}).to({state:[]},14).wait(1));
 
 	// Body
 	this.shape_16 = new cjs.Shape();
@@ -444,21 +457,21 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 	this.shape_19.graphics.f("#FFE054").s().p("AAAADIgDgCIAAgBIABgCIACgBIABAAIACABIAAABIABABIgBACIgBABIgBAAIAAABg");
 	this.shape_19.setTransform(39.55,37.425);
 
-	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_19},{t:this.shape_18},{t:this.shape_17},{t:this.shape_16}]}).wait(14));
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_19},{t:this.shape_18},{t:this.shape_17},{t:this.shape_16}]}).to({state:[]},14).wait(1));
 
 	// Beak
 	this.shape_20 = new cjs.Shape();
 	this.shape_20.graphics.f("#FFE054").s().p("AgiAdIAAgdIBDAOQgDApgaAPQgSgJgUgggAgiAAIAAgcQAMgXAZgSQAiAPgCAnQggAPgkAAIgBAAgAgiAAIAAAAg");
 	this.shape_20.setTransform(40.9542,1.3);
 
-	this.timeline.addTween(cjs.Tween.get(this.shape_20).wait(14));
+	this.timeline.addTween(cjs.Tween.get(this.shape_20).to({_off:true},14).wait(1));
 
 	// Crest
 	this.shape_21 = new cjs.Shape();
 	this.shape_21.graphics.f("#FF0000").s().p("AgBA1IgUgKIgcgIQgHglAHgoQAVgbAcAjQgTAlgCAoQAQgzAzACQAQAggQAbQgDACgMAAQgMAAgUgCg");
 	this.shape_21.setTransform(26.2833,-30.3649);
 
-	this.timeline.addTween(cjs.Tween.get(this.shape_21).wait(14));
+	this.timeline.addTween(cjs.Tween.get(this.shape_21).to({_off:true},14).wait(1));
 
 	// Tail
 	this.shape_22 = new cjs.Shape();
@@ -469,7 +482,7 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 	this.shape_23.graphics.f("#FF0000").s().p("AhOAXQgGgDADgQQADgOAKgSQALgSANgJQAMgKAGAEQAJAFBkB3QiYgigJgGg");
 	this.shape_23.setTransform(-33.1974,-6.8843);
 
-	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_23},{t:this.shape_22}]}).wait(14));
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_23},{t:this.shape_22}]}).to({state:[]},14).wait(1));
 
 	// Feet
 	this.shape_24 = new cjs.Shape();
@@ -480,7 +493,7 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 	this.shape_25.graphics.f("#E5C222").s().p("AgIAvQgNgJgNgQQgNgQgGgNQgGgNAEgEQAFgEBsgZQguBlgFAFIgDABQgEAAgIgHg");
 	this.shape_25.setTransform(-16.2159,22.1635,0.9568,1.1192);
 
-	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_25},{t:this.shape_24}]}).wait(14));
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_25},{t:this.shape_24}]}).to({state:[]},14).wait(1));
 
 }).prototype = p = new cjs.MovieClip();
 p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
@@ -523,6 +536,115 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 
 	// timeline functions:
 	this.frame_0 = function() {
+		function Bird(){
+			this.mc = exportRoot.bird;
+			this.initY = this.mc.y;
+			this.state = Bird.DEAD;
+			this.velocity = 0;
+			this.setupCollisionPoints();
+		}
+		
+		Bird.ALIVE = 0;
+		Bird.DYING = 1;
+		Bird.DEAD = 2;
+		
+		Bird.MAX_UP_ANGLE = -22.5;
+		Bird.MAX_DOWN_ANGLE = 90;
+		Bird.ANGLE_DIFF = Bird.MAX_DOWN_ANGLE - Bird.MAX_UP_ANGLE;
+		
+		Bird.prototype.updateVelocity = function(){
+			this.velocity += Main.GRAVITY;
+			
+			if(this.velocity > Main.MAX_VELOCITY){
+				this.velocity = Main.MAX_VELOCITY;
+			}
+			
+			this.mc.y += this.velocity;
+		}
+		
+		Bird.prototype.update = function(){
+			if(this.state === Bird.ALIVE || this.state === Bird.DYING){
+				this.updateVelocity();
+				this.updateRotation();
+			}
+		}
+		
+		Bird.prototype.isAlive = function(){
+			return this.state === Bird.ALIVE;
+		}
+		
+		Bird.prototype.isDead = function(){
+			return this.state === Bird.DEAD;
+		}
+		
+		Bird.prototype.startFlying = function(){
+			this.state = Bird.ALIVE;
+			this.mc.y = this.initY;
+			this.mc.play();
+			this.velocity = 0;
+			this.flap();
+		}
+		
+		Bird.prototype.flap = function(){
+			if(this.state === Bird.ALIVE && this.mc.y > 0){
+				this.velocity = Main.FLAP_IMPULSE;
+			}
+		}
+		
+		Bird.prototype.setupCollisionPoints = function(){
+			this.collisionPoints = [
+				this.mc.hit0,
+				this.mc.hit1,
+				this.mc.hit2,
+				this.mc.hit3,
+				this.mc.hit4,
+				this.mc.hit5,
+				this.mc.hit6,
+				this.mc.hit7,
+				this.mc.hit8
+			];
+			
+			for(let i = 0; i < this.collisionPoints.length; i++){
+				this.collisionPoints[i].visible = false;
+			}
+		}
+		
+		Bird.prototype.hitTest = function(target){
+			for(let i = 0; i < this.collisionPoints.length; i++){
+				const pt = this.collisionPoints[i].localToLocal(0, 0, target);
+				const collision = target.hitTest(pt.x, pt.y);
+				
+				if(collision){ 
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		Bird.prototype.hitGround = function(){
+			this.state = Bird.DEAD;
+			this.mc.stop();
+		}
+		
+		Bird.prototype.fallFromSky = function(){
+			if(this.state === Bird.ALIVE){
+				this.state = Bird.DYING;
+				this.velocity = 0;
+			}
+		}
+		
+		Bird.prototype.updateRotation = function(){
+			if(this.velocity > 0){
+				const norm = this.velocity / Main.MAX_VELOCITY;
+				this.mc.rotation = Bird.MAX_UP_ANGLE + (Bird.ANGLE_DIFF*norm);
+			}else{
+				this.mc.rotation = Bird.MAX_UP_ANGLE;
+			}
+		}
+		
+		Bird.prototype.getPosition = function(){
+			return {x: this.mc.x, y: this.mc.y};
+		}
 		function Pipes(){
 			this.scrolling = false;
 			
@@ -541,6 +663,8 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 		
 		Pipes.prototype.startScrolling = function(){
 			this.scrolling = true;
+			this.setupStartPosition();
+			this.approachingPipe = this.pipes[0];
 		}
 		
 		Pipes.prototype.stopScrolling = function(){
@@ -548,7 +672,7 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 		}
 		
 		Pipes.prototype.update = function(){
-			if (this.scrolling == true){
+			if (this.scrolling){
 				this.updatePipePositions();
 				this.checkLeftPipeIsOutsideScreen();
 			}
@@ -595,6 +719,33 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 				this.setRandomYPosition(pipe);
 			}
 		}
+		
+		Pipes.prototype.isBirdTouchingAPipe = function(bird){
+			for(let i = 0; i < this.pipes.length; i++){
+				if(bird.hitTest(this.pipes[i])){
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		Pipes.prototype.setNextApproachingPipe = function(){
+			for(let i = 0; i < this.pipes.length; i++){
+				if(this.pipes[i] === this.approachingPipe){
+					this.approachingPipe = this.pipes[i+1];
+					return;
+				}
+			}
+		}
+		
+		Pipes.prototype.hasBirdPassedApproachingPipe = function(bird){
+			let birdXPosition = bird.getPosition().x;
+			if(birdXPosition > this.approachingPipe.x){
+				return true;
+			}
+			
+			return false;
+		}
 		function Ground(){
 			this.scrolling = false;
 			this.slices = [
@@ -636,9 +787,19 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 				this.slices.push(firstSlice);
 			}
 		}
+		
+		Ground.prototype.isBirdTouchingGround = function(bird){
+			for(let i = 0; i < this.slices.length; i++){
+				if(bird.hitTest(this.slices[i])) return true;
+			}
+			return false;
+		}
 		function Main(){
 			this.ground = new Ground();
 			this.pipes = new Pipes();
+			this.bird = new Bird();
+			
+			this.score = 0;
 			
 			/*
 			exportRoot: represents the stage and all the content
@@ -660,19 +821,75 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 		}
 		
 		Main.SCROLL_SPEED = 3.0;
+		Main.GRAVITY = 0.55;
+		Main.FLAP_IMPULSE = -8.15;
+		Main.MAX_VELOCITY = 15;
 		
 		Main.prototype.update = function(e){
 			this.ground.update();
 			this.pipes.update();
+			this.bird.update();
+			
+			this.checkForBirdCollidingWithGround();
+			this.checkForBirdCollidingWithPipes();
+			this.checkForBirdPassingPipe();
 		}
 		
 		Main.prototype.userPressed = function(e){
-			this.startGame();
+			if(this.bird.isDead()){
+				this.startGame();
+			}else{
+				this.bird.flap();
+			}
 		}
 		
 		Main.prototype.startGame = function(){
+			this.score = 0;
 			this.ground.startScrolling();
 			this.pipes.startScrolling();
+			this.bird.startFlying();
+		}
+		
+		Main.prototype.checkForBirdCollidingWithGround = function(){
+			if(!this.bird.isDead()){
+				if(this.ground.isBirdTouchingGround(this.bird)){
+					this.birdHitGround();
+				}
+			}
+		}
+		
+		Main.prototype.checkForBirdCollidingWithPipes = function(){
+			if(!this.bird.isDead()){
+				if(this.pipes.isBirdTouchingAPipe(this.bird)){
+					this.birdHitPipe();
+				}
+			}
+		}
+		
+		Main.prototype.birdHitGround = function(){
+			this.bird.hitGround();
+			this.ground.stopScrolling();
+			this.pipes.stopScrolling();
+		}
+		
+		Main.prototype.birdHitPipe = function(){
+			this.bird.fallFromSky();
+			this.ground.stopScrolling();
+			this.pipes.stopScrolling();
+		}
+		
+		Main.prototype.checkForBirdPassingPipe = function(){
+			if(this.bird.isAlive()){
+				if(this.pipes.hasBirdPassedApproachingPipe(this.bird)){
+					this.pipes.setNextApproachingPipe();
+					this.scoredPoint();
+				}
+			}
+		}
+		
+		Main.prototype.scoredPoint = function(){
+			this.score++;
+			exportRoot.score.text = this.score;
 		}
 		
 		let main = new Main();
@@ -729,11 +946,12 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 	this.timeline.addTween(cjs.Tween.get(this.gameOverPrompt).wait(1));
 
 	// Bird
-	this.instance = new lib.Bird();
-	this.instance.parent = this;
-	this.instance.setTransform(95,174.65,0.3102,0.3098,0,0,0,3.2,-1.2);
+	this.bird = new lib.Bird();
+	this.bird.name = "bird";
+	this.bird.parent = this;
+	this.bird.setTransform(95,174.65,0.3102,0.3098,0,0,0,3.2,-1.2);
 
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
+	this.timeline.addTween(cjs.Tween.get(this.bird).wait(1));
 
 	// Ground
 	this.ground0 = new lib.GroundSlice();
@@ -775,12 +993,12 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.pipe1},{t:this.pipe2},{t:this.pipe0}]}).wait(1));
 
 	// Background
-	this.instance_1 = new lib.Background();
-	this.instance_1.parent = this;
-	this.instance_1.setTransform(161.8,200.1,1,1,0,0,0,161.8,200.1);
-	this.instance_1.cache(-12,-3,347,406);
+	this.instance = new lib.Background();
+	this.instance.parent = this;
+	this.instance.setTransform(161.8,200.1,1,1,0,0,0,161.8,200.1);
+	this.instance.cache(-12,-3,347,406);
 
-	this.timeline.addTween(cjs.Tween.get(this.instance_1).wait(1));
+	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
 
 }).prototype = p = new cjs.MovieClip();
 p.nominalBounds = new cjs.Rectangle(90,47.9,477.5,454.20000000000005);
