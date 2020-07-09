@@ -523,7 +523,50 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 
 	// timeline functions:
 	this.frame_0 = function() {
+		function Ground(){
+			this.scrolling = false;
+			this.slices = [
+				exportRoot.ground0,
+				exportRoot.ground1,
+				exportRoot.ground2
+			];
+			this.sliceWidth = exportRoot.ground1.x - exportRoot.ground0.x;
+			this.leftBound = exportRoot.ground0.x - this.sliceWidth;
+		}
+		
+		Ground.prototype.update = function(){
+			if(this.scrolling == true){
+				this.updateSlicePositions();
+				this.checkLeftSliceIsOutsideScreen();
+			}
+		}
+		
+		Ground.prototype.startScrolling = function(){
+			this.scrolling = true;
+		}
+		
+		Ground.prototype.stopScrolling = function(){
+			this.scrolling = false;
+		}
+		
+		Ground.prototype.updateSlicePositions = function(){
+			for(let i = 0; i < this.slices.length; i++){
+				this.slices[i].x -= Main.SCROLL_SPEED;
+			}
+		}
+		
+		Ground.prototype.checkLeftSliceIsOutsideScreen = function(){
+			let firstSlice = this.slices[0];
+			let lastSlice = this.slices[2];
+			if(firstSlice.x <= this.leftBound){
+				firstSlice.x = lastSlice.x + this.sliceWidth;
+				this.slices.shift();
+				this.slices.push(firstSlice);
+			}
+		}
 		function Main(){
+			this.ground = new Ground();
+			
 			/*
 			exportRoot: represents the stage and all the content
 				within it
@@ -543,12 +586,18 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 			);				
 		}
 		
+		Main.SCROLL_SPEED = 3.0;
+		
 		Main.prototype.update = function(e){
-			console.log("Main::update()");
+			this.ground.update();
 		}
 		
 		Main.prototype.userPressed = function(e){
-			console.log("Main::userPressed()");
+			this.startGame();
+		}
+		
+		Main.prototype.startGame = function(){
+			this.ground.startScrolling();
 		}
 		
 		let main = new Main();
