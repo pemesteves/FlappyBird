@@ -523,6 +523,78 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 
 	// timeline functions:
 	this.frame_0 = function() {
+		function Pipes(){
+			this.scrolling = false;
+			
+			this.distanceBetweenPipes = exportRoot.pipe1.x - exportRoot.pipe0.x;
+			this.leftBound = -exportRoot.pipe0.nominalBounds.width;
+			/*
+			nominalBounds: returns the bounding rectangle for a 
+				movie-clip's first frame
+			*/
+			
+			this.maxPipeY = exportRoot.pipe0.y;
+			this.minPipeY = exportRoot.pipe2.y;
+			
+			this.setupStartPosition();
+		}
+		
+		Pipes.prototype.startScrolling = function(){
+			this.scrolling = true;
+		}
+		
+		Pipes.prototype.stopScrolling = function(){
+			this.scrolling = false;
+		}
+		
+		Pipes.prototype.update = function(){
+			if (this.scrolling == true){
+				this.updatePipePositions();
+				this.checkLeftPipeIsOutsideScreen();
+			}
+		}
+		
+		Pipes.prototype.updatePipePositions = function(){
+			for (let i = 0; i < this.pipes.length; i++){
+				let pipe = this.pipes[i];
+				pipe.x -= Main.SCROLL_SPEED;
+			}
+		}
+		
+		Pipes.prototype.checkLeftPipeIsOutsideScreen = function(){
+			let leftMostPipe = this.pipes[0];
+			let rightMostPipe = this.pipes[2];
+			if (leftMostPipe.x < this.leftBound){
+				leftMostPipe.x = rightMostPipe.x + this.distanceBetweenPipes;
+				this.setRandomYPosition(leftMostPipe);
+				this.pipes.shift();
+				this.pipes.push(leftMostPipe);
+		  }
+		}
+		
+		Pipes.prototype.setRandomYPosition = function(pipe){
+			const delta = this.minPipeY - this.maxPipeY;
+			pipe.y = this.maxPipeY + Math.round(Math.random()*delta);
+		}
+		
+		Pipes.prototype.setupStartPosition = function(){
+			this.pipes = [
+				exportRoot.pipe0,
+				exportRoot.pipe1,
+				exportRoot.pipe2
+			];
+			
+			for(let i = 0; i < this.pipes.length; i++){
+				let pipe = this.pipes[i];
+				pipe.x = (lib.properties.width*1.5)+(i*this.distanceBetweenPipes);
+				/*
+				lib.properties contains some properties used to 
+					describe the stage (width, height, fps, color, ...)
+				*/
+				
+				this.setRandomYPosition(pipe);
+			}
+		}
 		function Ground(){
 			this.scrolling = false;
 			this.slices = [
@@ -566,6 +638,7 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 		}
 		function Main(){
 			this.ground = new Ground();
+			this.pipes = new Pipes();
 			
 			/*
 			exportRoot: represents the stage and all the content
@@ -590,6 +663,7 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 		
 		Main.prototype.update = function(e){
 			this.ground.update();
+			this.pipes.update();
 		}
 		
 		Main.prototype.userPressed = function(e){
@@ -598,6 +672,7 @@ p.nominalBounds = new cjs.Rectangle(-41.5,-35.8,86.9,73.6);
 		
 		Main.prototype.startGame = function(){
 			this.ground.startScrolling();
+			this.pipes.startScrolling();
 		}
 		
 		let main = new Main();
